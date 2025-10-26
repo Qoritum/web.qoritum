@@ -1,9 +1,4 @@
-import {
-  MailIcon,
-  MapPinIcon,
-  MessageSquareIcon,
-  PhoneIcon,
-} from "lucide-react";
+import { MessageSquareIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -12,27 +7,8 @@ import { TiktokIcon } from "../icons/tiktok";
 import { InstagramIcon } from "../icons/instagram";
 import { LinkedinIcon } from "../icons/linkedin";
 import { TwitterIcon } from "../icons/twitter";
-
-const contactInfo = [
-  {
-    icon: MapPinIcon,
-    title: "Encuentranos",
-    content: "Lima, Perú",
-    href: null,
-  },
-  {
-    icon: PhoneIcon,
-    title: "Teléfono",
-    content: "+51 924 001 129",
-    href: "https://wa.me/51924001129",
-  },
-  {
-    icon: MailIcon,
-    title: "Escríbenos",
-    content: "contacto@qoritum.com",
-    href: "mailto:contacto@qoritum.com",
-  },
-];
+import { CallToAction, Contact } from "@/lib/constants";
+import Link from "next/link";
 
 const footerLinks = [
   { text: "Términos Y Condiciones", href: "#" },
@@ -65,36 +41,38 @@ const socials = [
 
 export const Footer = (): React.JSX.Element => {
   return (
-    <footer className="flex flex-col w-full items-center justify-center bg-transparent mt-20 px-6">
-      <div className="container-screen-2xl flex flex-col items-center px-8 py-16 gap-4 bg-secondary rounded-4xl">
-        <h2 className="self-stretch [&_span]:font-arboria font-bold text-5xl text-center text-white">
-          ¿Estás Listo Para
+    <footer className="flex flex-col w-full items-center justify-center bg-transparent md:px-6">
+      <div className="md:container-screen-2xl flex flex-col items-center px-3 md:px-8 py-8 md:py-16 gap-4 bg-secondary md:rounded-4xl">
+        <h2 className="self-stretch [&_span]:font-arboria font-bold text-3xl md:text-5xl text-center text-white">
+          ¿Estás Listo Para{" "}
           <span className="text-[#e58621]">Impulsar Tu Negocio?</span>
         </h2>
 
-        <p className="w-full max-w-xl text-white text-xl text-center">
+        <p className="w-full max-w-xl text-white text-base md:text-xl text-center">
           Un negocio merece estar ordenado, conectado y bajo control. Comencemos
           con un diagnóstico gratuito
         </p>
 
-        <Button className="mt-5">
-          Agenda tu diagnóstico gratuito
-          <MessageSquareIcon className="w-6 h-6" />
+        <Button asChild className="mt-5">
+          <Link href={CallToAction} target="_blank">
+            Agenda tu diagnóstico gratuito
+            <MessageSquareIcon />
+          </Link>
         </Button>
       </div>
 
       <div className="flex flex-col w-full container-screen-2xl items-start gap-6 px-4 py-12">
-        <div className="flex w-full max-w-4xl items-center justify-end gap-6">
-          {contactInfo.map((item, index) => (
+        <div className="flex flex-wrap md:flex-nowrap w-full max-w-4xl items-center justify-end gap-6">
+          {Contact.map((item, index) => (
             <div key={index} className="flex items-center gap-2.5 flex-1">
-              <item.icon className="w-9 h-9 text-[#e58621]" />
+              <item.icon className="size-5 md:size-9 text-primary" />
               <div className="flex flex-col items-start justify-center flex-1">
                 <span className="text-primary font-bold font-arboria">
                   {item.title}
                 </span>
                 {item.href ? (
                   <a
-                    className="text-lg hover:text-primary"
+                    className="text-sm md:text-lg hover:text-primary text-nowrap"
                     href={item.href}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -102,14 +80,14 @@ export const Footer = (): React.JSX.Element => {
                     {item.content}
                   </a>
                 ) : (
-                  <div className="text-lg">{item.content}</div>
+                  <div className="text-sm md:text-lg text-nowrap">{item.content}</div>
                 )}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex items-end justify-between self-stretch w-full">
+        <div className="flex flex-col md:flex-row md:items-end justify-between self-stretch w-full">
           <div className="flex flex-col w-full max-w-xs items-start gap-2.5">
             <Image
               src="/qoritum_isotipo.png"
@@ -130,7 +108,7 @@ export const Footer = (): React.JSX.Element => {
             </span>
 
             <div className="flex flex-wrap gap-3 mt-2">
-              {socials.map(({href, icon, label}, i) => {
+              {socials.map(({ href, icon, label }, i) => {
                 return (
                   <a
                     key={i}
@@ -146,17 +124,18 @@ export const Footer = (): React.JSX.Element => {
           </div>
         </div>
 
-        <div className="flex items-start justify-between w-full">
-          <span className="opacity-80 text-lg w-full">
+        <div className="flex flex-col-reverse md:flex-row items-start justify-between w-full">
+          <span className="opacity-80 text-sm md:text-lg w-full">
             © 2025 QORITUM ITD — Todos los derechos reservados.
           </span>
 
-          <div className="flex w-full items-center justify-end gap-6">
+          <div className="flex w-full items-center md:justify-end gap-6 mb-4 md:mb-0">
             {footerLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
-                className="hover:opacity-100 opacity-70"
+                className="hover:opacity-100 opacity-70 underline text-primary md:text-foreground"
+                target="_blank"
               >
                 {link.text}
               </a>

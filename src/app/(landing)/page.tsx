@@ -1,5 +1,7 @@
+import { Contact } from "./section.contact";
 import { Hero } from "./section.hero";
 import { Process } from "./section.process";
+import { Services } from "./section.services";
 import { Solution } from "./section.solution";
 import { Stats } from "./section.stats";
 
@@ -10,7 +12,9 @@ export default function Home() {
       <Hero />
       <Stats />
       <Solution />
+      <Services />
       <Process />
+      <Contact />
     </main>
   )
 }

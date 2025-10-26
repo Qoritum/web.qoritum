@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const features = [
   {
@@ -25,11 +26,9 @@ const features = [
 
 export const Solution = () => {
   return (
-    <section className="relative py-24 flex w-full justify-center gap-12 container-screen-2xl">
+    <section className="relative py-24 flex flex-col lg:flex-row w-full justify-center gap-12 container-screen-2xl">
       <div className="w-full">
-        <h2 className="font-bold text-6xl mb-8">
-          Proceso de Solución
-        </h2>
+        <h2 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-8">Proceso de Solución</h2>
 
         <div className="flex flex-col items-start gap-12 relative self-stretch w-full flex-[0_0_auto]">
           {features.map((feature, index) => (
@@ -37,7 +36,7 @@ export const Solution = () => {
               key={index}
               className="flex flex-col w-full max-w-[536px] items-start gap-2.5 relative flex-[0_0_auto] rounded-[18px]"
             >
-              <h3 className="text-primary text-2xl font-medium">
+              <h3 className="text-primary text-xl lg:text-2xl font-medium">
                 {feature.title}
               </h3>
 
@@ -47,15 +46,44 @@ export const Solution = () => {
         </div>
       </div>
 
-      <div className="w-full h-170 mt-30 flex items-start justify-end gap-2.5 px-14 py-12 rounded-3xl rounded-bl-3xl bg-[url('/SOLUTION-IMG.png')] bg-cover bg-center flex-col **:text-white">
+      <div className="hidden w-full h-170 lg:mt-30 lg:flex items-start justify-end gap-2.5 lg:px-14 lg:py-12 rounded-3xl rounded-bl-3xl bg-[url('/SOLUTION-IMG.png')] bg-cover bg-center flex-col **:text-white">
         <div className="bg-secondary p-6 inline-flex flex-col items-end justify-center rounded-xl">
-          <span className="font-bold text-5xl text-right"> +45 </span>
+          <span className="font-bold text-2xl sm:text-5xl text-right"> +45 </span>
           <p> Clientes Activos</p>
         </div>
 
         <div className="bg-primary p-6 inline-flex flex-col items-end justify-center rounded-xl ml-14">
-          <span className="font-bold text-5xl text-right"> 97% </span>
+          <span className="font-bold text-2xl sm:text-5xl text-right"> 97% </span>
           <p className="text-end">
+            {" "}
+            Satisfacción <br /> Atención Al Cliente
+          </p>
+        </div>
+      </div>
+
+      <Image
+        src="/SOLUTION-IMG.png"
+        alt="SOLUCION"
+        width={1250}
+        height={1250}
+        className="w-full h-80 object-cover block lg:hidden"
+      />
+
+      <div className="grid grid-cols-2 gap-8 lg:hidden">
+        <div className="flex flex-col items-center">
+          <span className="font-bold text-4xl sm:text-7xl text-right text-secondary">
+            {" "}
+            +45{" "}
+          </span>
+          <p className="text-center"> Clientes Activos</p>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <span className="font-bold text-4xl sm:text-7xl text-right text-primary">
+            {" "}
+            97%{" "}
+          </span>
+          <p className="text-center">
             {" "}
             Satisfacción <br /> Atención Al Cliente
           </p>
