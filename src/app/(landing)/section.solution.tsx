@@ -28,7 +28,7 @@ export const Solution = () => {
   return (
     <section className="relative py-24 flex flex-col lg:flex-row w-full justify-center gap-12 container-screen-2xl">
       <div className="w-full">
-        <h2 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-8">Proceso de Solución</h2>
+        <h2 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-15">Proceso de Solución</h2>
 
         <div className="flex flex-col items-start gap-12 relative self-stretch w-full flex-[0_0_auto]">
           {features.map((feature, index) => (
@@ -36,7 +36,7 @@ export const Solution = () => {
               key={index}
               className="flex flex-col w-full max-w-[536px] items-start gap-2.5 relative flex-[0_0_auto] rounded-[18px]"
             >
-              <h3 className="text-primary text-xl lg:text-2xl font-medium">
+              <h3 className="text-primary text-xl lg:text-2xl font-bold">
                 {feature.title}
               </h3>
 

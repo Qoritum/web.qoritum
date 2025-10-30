@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function Hero() {
   return (
-    <section id="hero" className="pt-15">
+    <section id="hero" className="pt-10 md:pt-35">
       <div className="flex flex-col items-start lg:flex-row gap-8 lg:items-end justify-between container-screen-2xl pb-4 pt-12 sm:pt-0 sm:pb-4 sm:py-16">
         <h2 className="text-5xl sm:text-6xl lg:text-8xl font-bold capitalize">
           {" "}

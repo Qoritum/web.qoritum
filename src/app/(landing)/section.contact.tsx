@@ -48,6 +48,7 @@ const formFields = [
 ];
 
 export const Contact = () => {
+
   return (
     <section id="contact" className="flex flex-col-reverse md:flex-row w-full justify-center gap-16 px-6 bg-accent/20 my-10 py-20">
       <h2 className="sr-only"> Contáctanos </h2>
@@ -81,7 +82,7 @@ export const Contact = () => {
                     {item.content}
                   </a>
                 ) : (
-                  <div className="text-lg">{item.content}</div>
+                  <span className="text-lg">{item.content}</span>
                 )}
               </div>
             </div>

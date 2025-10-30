@@ -52,7 +52,7 @@ export function Process() {
     <section id="process" className="sm:rounded-4xl bg-secondary py-25">
       <div className="container-screen-xl grid md:grid-cols-2 gap-10">
         <div>
-          <div className="**:text-white sticky top-20">
+          <div className="**:text-white sticky top-30">
             <h2 className="capitalize text-3xl md:text-5xl lg:text-6xl text-balance mb-4 md:mb-12 font-bold">
               {" "}
               Nuestro proceso de transformación{" "}

@@ -2,42 +2,15 @@ import { MessageSquareIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { DiscordIcon } from "../icons/discord";
-import { TiktokIcon } from "../icons/tiktok";
-import { InstagramIcon } from "../icons/instagram";
-import { LinkedinIcon } from "../icons/linkedin";
-import { TwitterIcon } from "../icons/twitter";
-import { CallToAction, Contact } from "@/lib/constants";
+
+import { CallToAction, Contact, Social } from "@/lib/constants";
 import Link from "next/link";
 
 const footerLinks = [
-  { text: "Términos Y Condiciones", href: "#" },
-  { text: "Políticas de Privacidad", href: "#" },
+  { text: "Términos Y Condiciones", href: "/terms" },
+  { text: "Políticas de Privacidad", href: "/police" },
 ];
 
-const socials = [
-  {
-    icon: <DiscordIcon />,
-    href: "https://discord.gg/zeewspace",
-    label: "Discord",
-  },
-  {
-    icon: <TiktokIcon />,
-    href: "https://www.tiktok.com/@zeewspace",
-    label: "TikTok",
-  },
-  {
-    icon: <InstagramIcon />,
-    href: "https://www.instagram.com/zeewspace",
-    label: "Instagram",
-  },
-  {
-    icon: <LinkedinIcon />,
-    href: "https://www.linkedin.com/company/zeewspace",
-    label: "LinkedIn",
-  },
-  { icon: <TwitterIcon />, href: "https://x.com/zeewspace", label: "X" },
-];
 
 export const Footer = (): React.JSX.Element => {
   return (
@@ -80,7 +53,7 @@ export const Footer = (): React.JSX.Element => {
                     {item.content}
                   </a>
                 ) : (
-                  <div className="text-sm md:text-lg text-nowrap">{item.content}</div>
+                  <span className="text-sm md:text-lg text-nowrap">{item.content}</span>
                 )}
               </div>
             </div>
@@ -108,7 +81,7 @@ export const Footer = (): React.JSX.Element => {
             </span>
 
             <div className="flex flex-wrap gap-3 mt-2">
-              {socials.map(({ href, icon, label }, i) => {
+              {Social.map(({ href, icon, label }, i) => {
                 return (
                   <a
                     key={i}
@@ -126,19 +99,18 @@ export const Footer = (): React.JSX.Element => {
 
         <div className="flex flex-col-reverse md:flex-row items-start justify-between w-full">
           <span className="opacity-80 text-sm md:text-lg w-full">
-            © 2025 QORITUM ITD — Todos los derechos reservados.
+            © {new Date().getFullYear()} QORITUM ITD — Todos los derechos reservados.
           </span>
 
           <div className="flex w-full items-center md:justify-end gap-6 mb-4 md:mb-0">
             {footerLinks.map((link, index) => (
-              <a
+              <Link
                 key={index}
                 href={link.href}
                 className="hover:opacity-100 opacity-70 underline text-primary md:text-foreground"
-                target="_blank"
               >
                 {link.text}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

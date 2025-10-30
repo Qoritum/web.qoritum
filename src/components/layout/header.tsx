@@ -15,17 +15,18 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerDescription,
+  DrawerClose,
 } from "../ui/drawer";
 
 const links = [
-  { label: "Inicio", href: "#hero" },
-  { label: "Servicios", href: "#services" },
-  { label: "Proceso", href: "#process" },
-  { label: "Contacto", href: "#contact" },
+  { label: "Inicio", href: "/#hero" },
+  { label: "Servicios", href: "/#services" },
+  { label: "Proceso", href: "/#process" },
+  { label: "Contacto", href: "/#contact" },
 ];
 
 const filterSocial = Social.filter(
-  (x) => x.label === "Instagram" || x.label === "LinkedIn"
+  (x) => x.label === "Facebook" || x.label === "LinkedIn" || x.label === "Instagram"
 );
 
 export default function Header() {
@@ -120,9 +121,11 @@ const MenuMobile = () => {
         </DrawerHeader>
         <div className="flex flex-col gap-2 px-6 pb-4">
           {links.map(({ href, label }, i) => (
-            <Link key={i} href={href} className="text-lg font-questrial py-2">
-              {label} <span className="text-xs">#</span>
-            </Link>
+            <DrawerClose asChild key={i}>
+              <Link href={href} className="text-lg font-questrial py-2">
+                {label}
+              </Link>
+            </DrawerClose>
           ))}
           {filterSocial.map(({ href, icon, label }, i) => {
             return (

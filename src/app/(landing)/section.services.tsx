@@ -53,12 +53,12 @@ export const Services = (): React.JSX.Element => {
         </h2>
 
         <Carousel>
-          <CarouselContent className="-ml-1">
+          <CarouselContent className="-ml-1 *:mr-4 [&>*:last-child]:mr-0">
             {servicesData.map((service, i) => {
               return (
                 <CarouselItem
                   key={i}
-                  className="bg-background p-4 rounded-3xl basis-[80%] sm:basis-[65%] md:basis-[40%] lg:basis-[28%] mr-4"
+                  className="bg-background p-4 rounded-3xl basis-full sm:basis-[65%] md:basis-[40%] lg:basis-[28%]"
                 >
                   <Image
                     alt={`Service ${i}`}
