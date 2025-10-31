@@ -2,6 +2,8 @@
 import { Footer } from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { ReactLenis } from "lenis/react";
+import { Toaster } from "@/components/ui/sonner";
+
 import React from "react";
 
 export default function Template({
@@ -14,8 +16,9 @@ export default function Template({
       {/** 
       <WhatsAppFixed />
       */}
-
+      <Toaster />
       <Footer />
     </ReactLenis>
   );
 }
+

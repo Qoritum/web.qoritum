@@ -28,13 +28,13 @@ export const Stats = (): React.JSX.Element => {
               <h3 className=" text-primary text-2xl sm:text-4xl">
                 {feature.title}
               </h3>
-              <p className="sm:text-xl opacity-60">
-                {feature.subtitle}
-              </p>
+              <p className="sm:text-xl opacity-60">{feature.subtitle}</p>
             </div>
           ))}
         </div>
+        <span className="sr-only">El Peje es gay jaja</span>
       </div>
     </section>
   );
 };
+

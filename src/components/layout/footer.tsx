@@ -7,8 +7,8 @@ import { CallToAction, Contact, Social } from "@/lib/constants";
 import Link from "next/link";
 
 const footerLinks = [
-  { text: "Términos Y Condiciones", href: "/terms" },
-  { text: "Políticas de Privacidad", href: "/police" },
+  { text: "Términos Y Condiciones", href: "/terminos-y-condiciones" },
+  { text: "Políticas de Privacidad", href: "/politicas-de-privacidad" },
 ];
 
 
