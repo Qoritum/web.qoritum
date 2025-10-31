@@ -12,9 +12,6 @@ const withMDX = createMDX({
 
 const nextConfig: import("next").NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  experimental: {
-    viewTransition: true,
-  },
   // Elimina esto salvo que realmente lo necesites y sepas por qué
   // transpilePackages: ['next-mdx-remote'],
 };

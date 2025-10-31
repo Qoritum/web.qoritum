@@ -1,10 +1,11 @@
-// import { WhatsAppFixed } from "@/components/layout/whatsapp";
+import React from "react";
+
 import { Footer } from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { ReactLenis } from "lenis/react";
 import { Toaster } from "@/components/ui/sonner";
 
-import React from "react";
+import { WhatsAppFixed } from "@/components/layout/whatsapp";
 
 export default function Template({
   children,
@@ -13,9 +14,9 @@ export default function Template({
     <ReactLenis root>
       <Header />
       {children}
-      {/** 
+      
       <WhatsAppFixed />
-      */}
+
       <Toaster />
       <Footer />
     </ReactLenis>

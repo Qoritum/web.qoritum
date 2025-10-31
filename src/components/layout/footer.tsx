@@ -35,7 +35,7 @@ export const Footer = (): React.JSX.Element => {
       </div>
 
       <div className="flex flex-col w-full container-screen-2xl items-start gap-6 px-4 py-12">
-        <div className="flex flex-wrap md:flex-nowrap w-full max-w-4xl items-center justify-end gap-6">
+        <div className="flex flex-wrap md:flex-nowrap w-full max-w-4xl mx-auto items-center justify-end gap-6">
           {Contact.map((item, index) => (
             <div key={index} className="flex items-center gap-2.5 flex-1">
               <item.icon className="size-5 md:size-9 text-primary" />
@@ -75,7 +75,7 @@ export const Footer = (): React.JSX.Element => {
             </p>
           </div>
 
-          <div className="inline-flex flex-col items-end gap-2">
+          <div className="inline-flex flex-col items-start md:items-end gap-2">
             <span className="text-primary font-bold font-arboria block">
               Síguenos
             </span>

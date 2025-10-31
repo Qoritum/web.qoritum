@@ -2,7 +2,7 @@ import { InstagramIcon } from "@/components/icons/instagram";
 import { LinkedinIcon } from "@/components/icons/linkedin";
 import { TiktokIcon } from "@/components/icons/tiktok";
 // import { TwitterIcon } from "@/components/icons/twitter";
-//import { DiscordIcon } from "@/components/icons/discord";
+// import { DiscordIcon } from "@/components/icons/discord";
 import { FacebookIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 
 // https://x.com/qoritumitd

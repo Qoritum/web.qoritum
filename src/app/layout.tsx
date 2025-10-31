@@ -44,10 +44,10 @@ const arboria = localFont({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s 3=8 Qoritum",
+    template: "%s | Qoritum",
     default: "Qoritum"
   },
-  description: "Ingenieros industriales con pc",
+  description: "Diseñamos soluciones digitales ajustadas a las necesidades de tu negocio para acelerar su transformación en la Industria 4.0.",
 };
 
 export default function RootLayout({
