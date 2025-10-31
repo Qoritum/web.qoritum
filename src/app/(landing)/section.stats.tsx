@@ -32,7 +32,9 @@ export const Stats = (): React.JSX.Element => {
             </div>
           ))}
         </div>
-        <span className="sr-only">El Peje es gay jaja</span>
+        <span className="sr-only">
+          <span> Zeew Space </span> | <span> Neenbyss </span>
+        </span>
       </div>
     </section>
   );
