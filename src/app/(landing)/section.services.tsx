@@ -48,7 +48,7 @@ export const Services = (): React.JSX.Element => {
   return (
     <section id="services" className="bg-accent/20 py-32">
       <div className="container-screen-2xl">
-        <h2 className="font-bold text-primary text-3xl md:text-6xl text-center mb-20">
+        <h2 className="font-semibold text-primary text-3xl md:text-6xl text-center mb-20">
           Nuestros Servicios
         </h2>
 

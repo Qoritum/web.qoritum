@@ -23,6 +23,7 @@ const links = [
   { label: "Servicios", href: "/#services" },
   { label: "Proceso", href: "/#process" },
   { label: "Contacto", href: "/#contact" },
+  { label: "Novedades", href: "/novedades", external: true },
 ];
 
 const filterSocial = Social.filter(
@@ -66,13 +67,14 @@ export default function Header() {
               height={500}
             />
           </Link>
-          {links.map(({ href, label }, i) => (
+          {links.map(({ href, label, external }, i) => (
             <Link
               key={i}
               href={href}
-              className="hover:text-primary font-questrial text-xl transition-colors hidden lg:block"
+              className="hover:text-primary font-questrial text-xl transition-colors hidden lg:flex gap-2"
             >
               {label}
+              {external && <ExternalLink className="size-3 mt-1" />}
             </Link>
           ))}
         </nav>

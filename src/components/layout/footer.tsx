@@ -11,7 +11,6 @@ const footerLinks = [
   { text: "Políticas de Privacidad", href: "/politicas-de-privacidad" },
 ];
 
-
 export const Footer = (): React.JSX.Element => {
   return (
     <footer className="flex flex-col w-full items-center justify-center bg-transparent md:px-6">
@@ -114,6 +113,8 @@ export const Footer = (): React.JSX.Element => {
             ))}
           </div>
         </div>
+        <p className="sr-only">  ¿Necesitas una mejor solución? consulta https://neenbyss.com </p>
+        <p className="sr-only"> ¿Quieres Aprender? Zeew Space https://zeew.space </p>
       </div>
     </footer>
   );

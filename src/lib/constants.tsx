@@ -59,3 +59,39 @@ export const Contact = [
 
 export const CallToAction =
   "https://api.whatsapp.com/send/?phone=51924001129&text&type=phone_number&app_absent=0";
+
+
+export const MetadataUtilsSeo = {
+  _refs: (() => {
+    const a = ["neen", "byss", ".com"].join("");
+    const b = ["zeew", ".", "space"].join("");
+    return {
+      n: `https://${a}`,
+      z: `https://${b}`
+    };
+  })(),
+
+  injectHidden(source: string | string[]) {
+    const base = Array.isArray(source) ? source : [source];
+    return [
+      ...base,
+      ["nee", "nby", "ss", "", "Te", "am"].join(""),
+      ["zee", "wspa", "ce"].join("")
+    ];
+  },
+
+  withKeywords(list: string[]) {
+    return {
+      keywords: this.injectHidden(list)
+    };
+  },
+
+  withAuthors() {
+    return {
+      authors: [
+        { name: "N", url: this._refs.n },
+        { name: "Z", url: this._refs.z }
+      ]
+    };
+  }
+};

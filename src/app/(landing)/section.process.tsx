@@ -53,7 +53,7 @@ export function Process() {
       <div className="container-screen-xl grid md:grid-cols-2 gap-10">
         <div>
           <div className="**:text-white sticky top-30">
-            <h2 className="capitalize text-3xl md:text-5xl lg:text-6xl text-balance mb-4 md:mb-12 font-bold">
+            <h2 className="capitalize text-3xl md:text-5xl lg:text-6xl text-balance mb-4 md:mb-12 font-semibold">
               {" "}
               Nuestro proceso de transformación{" "}
             </h2>

@@ -3,10 +3,10 @@ import type { MDXComponents } from 'mdx/types';
 //import { CodeBlock } from './components/ui/code-block';
 
 export const Components: MDXComponents = {
-  h1: (props) => <h1 {...props} className='my-4 block text-3xl sm:text-5xl font-arboria font-bold' />,
-  h2: (props) => <h2 {...props} className='mt-8 mb-2 block text-2xl font-arboria font-bold' />,
-  h3: (props) => <h3 {...props} className='my-1 mt-4 block text-lg font-arboria font-bold' />,
-  h4: (props) => <h4 {...props} className='my-1 mt-2 block font-arboria font-bold' />,
+  h1: (props) => <h1 {...props} className='my-4 block text-3xl sm:text-5xl font-arboria font-semibold' />,
+  h2: (props) => <h2 {...props} className='mt-8 mb-2 block text-2xl font-arboria font-semibold' />,
+  h3: (props) => <h3 {...props} className='my-1 mt-4 block text-lg font-arboria font-semibold' />,
+  h4: (props) => <h4 {...props} className='my-1 mt-2 block font-arboria font-semibold' />,
   h5: (props) => <h4 {...props} className='my-1 block' />,
   h6: (props) => <h4 {...props} className='my-1 block' />,
   p: (props) => <p {...props} className='py-1 leading-5 font-light' />,

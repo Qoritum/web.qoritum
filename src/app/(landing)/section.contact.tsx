@@ -44,7 +44,7 @@ export const Contact = () => {
             >
               <item.icon className="size-9 text-[#e58621]" />
               <div className="flex flex-col items-start justify-center flex-1">
-                <span className="text-primary font-bold font-arboria">
+                <span className="text-primary font-semibold font-arboria">
                   {item.title}
                 </span>
                 {item.href ? (
@@ -66,7 +66,7 @@ export const Contact = () => {
       </div>
 
       <div className="md:py-20 w-full xl:w-[70%]">
-        <h3 className="font-bold text-4xl mb-8 md:max-w-lg">
+        <h3 className="font-semibold text-4xl mb-8 md:max-w-lg">
           Comunícate Con Nosotros
         </h3>
         <ContactForm />

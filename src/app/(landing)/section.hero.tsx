@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section id="hero" className="pt-10 md:pt-35">
       <div className="flex flex-col items-start lg:flex-row gap-8 lg:items-end justify-between container-screen-2xl pb-4 pt-12 sm:pt-0 sm:pb-4 sm:py-16">
-        <h2 className="text-5xl sm:text-6xl lg:text-8xl font-bold capitalize">
+        <h2 className="text-5xl sm:text-6xl lg:text-8xl font-semibold capitalize">
           {" "}
           Juntos hacia <br /> la{" "}
           <span className="text-primary font-arboria">cima digital</span>
@@ -55,7 +55,7 @@ export function Hero() {
 
               <p className="text-white text-xl max-w-xl">
                 Diseñamos soluciones digitales ajustadas a las necesidades de tu
-                negocio para&nbsp;&nbsp;acelerar su transformación en la
+                negocio para acelerar su transformación en la
                 Industria 4.0.
               </p>
             </div>
