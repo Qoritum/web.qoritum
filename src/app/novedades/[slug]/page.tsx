@@ -6,7 +6,7 @@ import { getAllNews, getNew } from "@/lib/get-new";
 import { CalendarIcon } from "lucide-react";
 import { BASE_URL, createMetadata } from "@/lib/metadata";
 
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -17,13 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const markdown = await getNew(slug);
 
-  if(!markdown?.meta.published) {
-    return {}
+  if (!markdown?.meta.published) {
+    return {};
   }
 
   return createMetadata({
-    title: markdown?.meta.title,
-    description: markdown?.meta.summary,
+    title: markdown?.meta.meta_title || markdown?.meta.title,
+    description: markdown?.meta.meta_description || markdown?.meta.summary,
     keywords: markdown?.meta.keywords,
     ...(markdown?.meta.og_image && [
       {
@@ -66,7 +66,7 @@ export default async function PostPage({ params }: Props) {
       <div className="flex items-center sm:justify-center container-screen-lg gap-3 mb-4 sm:mb-12 lg:mb-20">
         <span className="flex items-center gap-2 font-arboria font-semibold">
           <CalendarIcon className="mb-1" />
-          {dayjs(markdown.meta.date).format('MMM D, YYYY')}
+          {dayjs(markdown.meta.date).format("MMM D, YYYY")}
         </span>
       </div>
 
