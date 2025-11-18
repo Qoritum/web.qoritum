@@ -68,7 +68,7 @@ export function createMetadata(override: CreateMetadataOptions): Metadata {
       siteName: "Qoritum",
       images: override.openGraph?.images ?? [
         {
-          url: `${BASE_URL}/OG.png`,
+          url: `${BASE_URL}/og.png`,
           width: 1200,
           height: 630,
           alt: "QORITUM",
