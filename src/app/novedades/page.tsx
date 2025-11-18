@@ -22,9 +22,10 @@ export default async function News() {
         <section>
           <div className="sticky top-20 ">
             <h2 className="text-4xl sm:text-5xl lg:text-7xl font-semibold mb-3 lg:mb-8">
-              Explora nuestras últimas novedades en Qoritum.
+              {" "}
+              Novedades de Qoritum{" "}
             </h2>
-            <p>Descubre las nuevas</p>
+            <p>Explora nuestras últimas novedades en qoritum</p>
             <div className="lg:h-80" />
           </div>
         </section>
