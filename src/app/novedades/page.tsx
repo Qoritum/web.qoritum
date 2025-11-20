@@ -34,7 +34,9 @@ export default async function News() {
           {news.length > 0 &&
             news.map((metadata, i) => {
               return <Article key={i} {...metadata} />;
-            })}
+            })
+          }
+          {news.length === 0 && <span className="text-center block text-lg py-20"> Aún no tenemos novedades para mostrar </span>}
         </section>
       </div>
     </main>
@@ -46,11 +48,11 @@ const Article = (metadata: NewMetadata) => {
   return (
     <article>
       {metadata.og_image && (
-        <div className="relative">
+        <div className="relative aspect-video rounded-xl overflow-hidden">
           <img
             alt="Blog-image"
             src={metadata.og_image}
-            className="aspect-video rounded-xl bg-black/10 object-cover"
+            className=" bg-black/10 object-cover size-full"
           />
 
           <div className="absolute top-2 md:top-4 right-2 md:right-4 bg-background rounded-full flex items-center justify-center p-2 md:p-5">

@@ -60,7 +60,7 @@ export function createMetadata(override: CreateMetadataOptions): Metadata {
     },
 
     openGraph: {
-      title: "Consultoría IT y Transformación Digital | Qoritum",
+      title: override.title ?? "Consultoría IT y Transformación Digital | Qoritum",
       description:
         override.description ??
         "Servicios de consultoría IT y soluciones de ingeniería industrial para micro y grandes empresas. Optimización de procesos, automatización, infraestructura tecnológica y modernización operativa para acelerar la transformación digital.",

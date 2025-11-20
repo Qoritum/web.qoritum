@@ -71,11 +71,13 @@ export default async function PostPage({ params }: Props) {
       </div>
 
       {markdown.meta.og_image && (
-        <img
-          alt="BLOG_COVER"
-          src={markdown.meta.og_image}
-          className="aspect-video lg:rounded-2xl lg:container-screen-xl w-full"
-        />
+        <div className="aspect-video lg:container-screen-xl w-full">
+          <img
+            alt="BLOG_COVER"
+            src={markdown.meta.og_image}
+            className="size-full lg:rounded-2xl"
+          />
+        </div>
       )}
 
       <section className="container-screen-lg mt-8 pb-8">

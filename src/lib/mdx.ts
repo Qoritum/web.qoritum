@@ -1,11 +1,13 @@
-'use server';
-import fs from 'fs';
-import path from 'path';
+"use server";
+import fs from "fs";
+import path from "path";
 
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
-import { compileMDX } from 'next-mdx-remote/rsc';
-import { Components } from '@/mdx-components';
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import rehypeUnwrapImages from "rehype-unwrap-images";
+
+import { compileMDX } from "next-mdx-remote/rsc";
+import { Components } from "@/mdx-components";
 
 const dir = process.cwd();
 
@@ -14,7 +16,9 @@ type Default = Record<string, unknown>;
 export const getMDX = async <T = Default>(root: string, slug: string) => {
   try {
     const filePath = path.join(dir, root, `${slug}.mdx`);
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const raw = fs.readFileSync(filePath, "utf8");
+
+    const fileContent = raw.replace(/^\uFEFF/, "").trimStart();
 
     const { frontmatter, content } = await compileMDX({
       source: fileContent,
@@ -22,13 +26,13 @@ export const getMDX = async <T = Default>(root: string, slug: string) => {
       options: {
         mdxOptions: {
           remarkPlugins: [remarkGfm],
-          rehypePlugins: [rehypeHighlight],
+          rehypePlugins: [rehypeHighlight, rehypeUnwrapImages],
         },
         parseFrontmatter: true,
       },
     });
 
-    return { meta: { ...(frontmatter as T), slug: slug }, content };
+    return { meta: { ...(frontmatter as T), slug }, content };
   } catch {
     return null;
   }
@@ -42,7 +46,7 @@ export const getAllMDX = async <T = Default>(
       currentPage?: number;
       pageSize?: number;
     };
-  },
+  }
 ) => {
   const dirPath = path.join(dir, root);
   if (!fs.existsSync(dirPath)) {
@@ -53,13 +57,13 @@ export const getAllMDX = async <T = Default>(
     }; // Manejo de error
   }
 
-  const files = fs.readdirSync(dirPath).filter((file) => file.endsWith('.mdx'));
+  const files = fs.readdirSync(dirPath).filter((file) => file.endsWith(".mdx"));
   let posts: T[] = [];
 
   for (const fileName of files) {
-    const file = fileName.replace('.mdx', '');
+    const file = fileName.replace(".mdx", "");
     const markdown = await getMDX<T>(root, file);
-    if (markdown) posts.push({ ...markdown.meta, slug: file } as T);
+    if (markdown) posts.push({ ...markdown.meta } as T);
   }
 
   // Filtrado en los metadatos
@@ -69,7 +73,8 @@ export const getAllMDX = async <T = Default>(
     posts = posts.filter((post: any) => {
       let matches = true;
       if (name) {
-        matches = matches && post?.title?.toLowerCase().includes(name.toLowerCase());
+        matches =
+          matches && post?.title?.toLowerCase().includes(name.toLowerCase());
       }
       return matches;
     });
@@ -88,3 +93,4 @@ export const getAllMDX = async <T = Default>(
     data: posts.slice(startIndex, endIndex),
   };
 };
+
