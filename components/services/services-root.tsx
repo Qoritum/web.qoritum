@@ -3,7 +3,7 @@
 import { useMotionValueEvent, useScroll, useTransform } from "motion/react"
 import { useCallback, useMemo, useRef, useState, type ReactNode } from "react"
 import { ServicesProvider } from "./services-context"
-import type { ServiceItem } from "./services.data"
+import type { ServiceItem } from "@/lib/services"
 import { usePageScroll } from "@/hooks/use-page-scroll"
 
 // Scroll distance per service, in small viewport heights.

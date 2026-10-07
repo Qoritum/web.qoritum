@@ -1,21 +1,39 @@
-﻿"use client"
+"use client"
 
 import { useRef, useState, type FormEvent } from "react"
 import { trackEvent } from "@/lib/marketing"
 import type { Country, Value } from "react-phone-number-input/input"
-import { contactSchema, type ContactField } from "./contact-schema"
+import {
+  contactSchema,
+  type ContactField,
+  type ContactValues,
+} from "./contact-schema"
 
-export function useContactForm() {
+export function useContactForm({
+  initialImprovement = "",
+  formId = "contact",
+}: { initialImprovement?: string; formId?: string } = {}) {
   const started = useRef(false)
   const [errors, setErrors] = useState<Partial<Record<ContactField, string>>>(
     {}
   )
   const [validated, setValidated] = useState(false)
+  const [values, setValues] = useState<ContactValues>()
   const [country, setCountry] = useState<Country>("PE")
   const [phone, setPhone] = useState<Value>()
   const [sector, setSector] = useState("")
-  const [improvement, setImprovement] = useState("")
+  const [improvement, setImprovement] = useState(initialImprovement)
+  const [suggestedImprovement, setSuggestedImprovement] =
+    useState(initialImprovement)
   const [consent, setConsent] = useState(false)
+
+  // A changed diagnosis updates the suggestion while preserving an explicit
+  // selection and all contact fields when the visitor returns to earlier steps.
+  if (suggestedImprovement !== initialImprovement) {
+    setSuggestedImprovement(initialImprovement)
+    if (improvement === suggestedImprovement) setImprovement(initialImprovement)
+    setValidated(false)
+  }
 
   function clearError(field: ContactField) {
     setValidated(false)
@@ -45,8 +63,9 @@ export function useContactForm() {
     }
     setErrors({})
     // API pending. Connect result.data here; no request is made by this preview.
+    setValues(result.data)
     setValidated(true)
-    trackEvent("form_validated", { form_id: "contact" })
+    trackEvent("form_validated", { form_id: formId })
   }
 
   const fieldProps = (name: ContactField) => ({
@@ -60,11 +79,12 @@ export function useContactForm() {
     start: () => {
       if (!started.current) {
         started.current = true
-        trackEvent("form_start", { form_id: "contact" })
+        trackEvent("form_start", { form_id: formId })
       }
     },
     errors,
     validated,
+    values,
     submit,
     fieldProps,
     clearError,

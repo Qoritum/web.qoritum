@@ -7,6 +7,7 @@ import { Results } from "./results"
 import { Metrics } from "./metrics"
 import { pageMetadata, websiteStructuredData } from "@/lib/seo"
 import { site } from "@/lib/site"
+import { StructuredData } from "@/components/structured-data"
 
 export const metadata = pageMetadata(
   "Software, automatización e IA para empresas",
@@ -18,18 +19,13 @@ export default function Landing() {
   const structuredData = websiteStructuredData()
   return (
     <main id="main-content" className="overflow-x-clip">
-      {structuredData && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
-          }}
-        />
-      )}
+      <StructuredData data={structuredData} />
       <Hero />
       <About />
       <Services />
+      <div className="h-24" />
       <Results />
+      <div className="h-8" />
       <Metrics />
       <FAQ />
       <Contact />

@@ -15,19 +15,15 @@ export function Metrics() {
     <section
       id="metricas"
       aria-labelledby="metrics-heading"
-      className="relative isolate overflow-hidden border-y border-foreground/10 py-20 sm:py-28 lg:py-32"
+      className="relative isolate overflow-hidden py-20 sm:py-28 lg:py-32"
     >
       <SectionBackdrop
         pattern="dots"
         shape="bridge"
         className="left-1/3 text-primary"
       />
-      <div className="container-screen-2xl grid items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+      <div className="container-screen-2xl grid items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
         <div>
-          <P className="mb-6 flex items-center gap-3 font-mono text-primary">
-            <span aria-hidden="true" className="h-px w-8 bg-current" />
-            Resultados de negocio
-          </P>
           <H2 reveal id="metrics-heading">
             Más control, velocidad y capacidad de escalar.
           </H2>
@@ -46,7 +42,7 @@ export function Metrics() {
                 <P className="max-w-40 text-foreground/65">{label}</P>
               </dt>
               <dd className="order-1">
-                <H3 as="span" className="mb-0 font-mono text-primary">
+                <H3 as="span" className="mb-0 text-6xl! font-mono text-primary">
                   <AnimatedNumber
                     value={value}
                     suffix={suffix}

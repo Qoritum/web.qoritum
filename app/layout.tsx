@@ -2,10 +2,11 @@ import { Geist_Mono, Inter, Lunasima } from "next/font/google"
 
 import "./globals.css"
 import "lenis/dist/lenis.css"
-import { SmoothScroll } from "@/components/smooth-scroll"
+import { SmoothScroll } from "@/components/layout/smooth-scroll"
 import { cn } from "@/lib/utils"
 import { baseMetadata } from "@/lib/seo"
-import { Footer } from "@/components/footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { ConsentProvider } from "@/components/marketing/consent"
 import { Tracking } from "@/components/marketing/tracking"
 
@@ -49,6 +50,7 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         <ConsentProvider>
+          <Header />
           {children}
           <Footer />
           <Tracking />

@@ -1,12 +1,24 @@
-﻿import { P } from "@/components/typography/description"
+import { P } from "@/components/typography/description"
 import { ResultsRoot } from "@/components/results/results-root"
-import { RESULTS } from "@/components/results/results.data"
+import { getFeaturedProjects } from "@/lib/projects"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { H2 } from "@/components/typography/heading"
 
-export function Results() {
+export async function Results() {
+  const projects = await getFeaturedProjects()
+  const results = projects.map((project) => ({
+    id: project.slug,
+    image: project.cover,
+    alt: project.coverAlt,
+    title: project.title,
+    detail: `${project.kind === "concept" ? "Concepto de solución · " : ""}${project.summary}`,
+    href: `/proyectos/${project.slug}`,
+  }))
+  if (!results.length) return null
   return (
-    <ResultsRoot results={RESULTS}>
-      <div className="container-screen-2xl flex shrink-0 flex-col gap-4 pt-8 pb-8 sm:pt-12 md:flex-row md:items-end md:justify-between md:pt-20">
+    <ResultsRoot results={results}>
+      <div className="container-screen-2xl flex shrink-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <H2 reveal className="mb-0">
           <span
             id="results-heading"
@@ -18,10 +30,15 @@ export function Results() {
             Una primera mejora medible.
           </span>
         </H2>
-        <P className="max-w-xs md:text-right lg:max-w-sm">
-          No empezamos por un proyecto de un año, sino por algo que se pueda
-          comprobar rápido. <br /> Lo que funciona, se escala.
-        </P>
+        <div className="flex flex-col items-start gap-4 md:items-end">
+          <P className="md:text-right max-w-md mb-4">
+            No empezamos por un proyecto de un año, sino por algo que se pueda
+            comprobar rápido. <br /> Lo que funciona, se escala.
+          </P>
+          <Button variant="outline" asChild>
+            <Link href="/proyectos">Ver todos los proyectos</Link>
+          </Button>
+        </div>
       </div>
     </ResultsRoot>
   )

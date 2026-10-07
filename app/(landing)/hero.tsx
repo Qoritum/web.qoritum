@@ -2,19 +2,27 @@ import { P } from "@/components/typography/description"
 import { H1 } from "@/components/typography/heading"
 import { Button } from "@/components/ui/button"
 import { Fragment } from "react/jsx-runtime"
+import Image from "next/image"
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb"
 
 const TAGS = ["IoT", "Automatización", "Integración", "IA/BI"]
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section data-header-tone="light" className="relative overflow-hidden">
       <div className="absolute inset-0 z-1 size-full bg-linear-to-l from-[#121123]/90 via-[#3B2E1F]/70 to-[#131313]/85" />
-      <img
-        alt=""
-        src="https://images.unsplash.com/photo-1786556025217-666148165a77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODgzNzIzNzB8&ixlib=rb-4.1.0&q=80&w=1080"
-        width={1500}
-        height={1500}
-        className="absolute inset-0 size-full object-cover"
+      <Image
+        alt="Equipo trabajando en un proyecto digital"
+        src="/images/results-build.jpg"
+        fill
+        preload
+        sizes="100vw"
+        className="object-cover"
       />
 
       <div

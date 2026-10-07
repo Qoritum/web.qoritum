@@ -1,9 +1,10 @@
-﻿import Link from "next/link"
+import Link from "next/link"
 import { ArrowUpRight, ArrowUp, Mail, MessageCircle, Phone } from "lucide-react"
-import { H2, H3 } from "@/components/typography/heading"
+import { H2 } from "@/components/typography/heading"
+import { BrandLogo } from "@/components/layout/brand-logo"
 import { P } from "@/components/typography/description"
 import { Button } from "@/components/ui/button"
-import { SERVICES } from "@/components/services/services.data"
+import { SERVICES } from "@/lib/services"
 import { CookieSettingsButton } from "@/components/marketing/consent"
 import { site, navigation, socialLinks } from "@/lib/site"
 import { SectionBackdrop } from "@/components/section-backdrop"
@@ -33,7 +34,7 @@ export function Footer() {
             </H2>
           </div>
           <Button asChild>
-            <Link href="/#contacto">
+            <Link href="/contactanos">
               Conversemos <ArrowUpRight data-icon="inline-end" />
             </Link>
           </Button>
@@ -45,9 +46,7 @@ export function Footer() {
               aria-label="Qoritum, inicio"
               className="inline-block focus-visible:outline-2 focus-visible:outline-primary"
             >
-              <H3>
-                qoritum<span className="text-primary">.</span>
-              </H3>
+              <BrandLogo tone="cream" className="mb-6" />
             </Link>
             <P className="max-w-sm">
               Entendemos primero. Digitalizamos después. Software,
@@ -83,7 +82,10 @@ export function Footer() {
             <ul className="space-y-2">
               {SERVICES.map((service) => (
                 <li key={service.id}>
-                  <Link href="/#servicios" className={footerLink}>
+                  <Link
+                    href={`/servicios#${service.id}`}
+                    className={footerLink}
+                  >
                     {service.title}
                   </Link>
                 </li>

@@ -1,6 +1,7 @@
-﻿import type { Metadata } from "next"
+import type { Metadata } from "next"
+import type { Project } from "./project-content"
 import { site, isIndexable, socialLinks } from "./site"
-import { SERVICES } from "@/components/services/services.data"
+import { SERVICES } from "@/lib/services"
 
 export const baseMetadata: Metadata = {
   metadataBase: new URL(site.url ?? "http://localhost:3000"),
@@ -140,5 +141,40 @@ export function websiteStructuredData() {
         about: { "@id": organizationId },
       },
     ],
+  }
+}
+
+export function projectMetadata(project: Project): Metadata {
+  const metadata = pageMetadata(
+    project.title,
+    project.summary,
+    `/proyectos/${project.slug}`
+  )
+  return {
+    ...metadata,
+    openGraph: {
+      ...metadata.openGraph,
+      type: "article",
+      publishedTime: project.date,
+      modifiedTime: project.updated ?? project.date,
+      images: [{ url: project.cover, alt: project.coverAlt }],
+    },
+    twitter: { ...metadata.twitter, images: [project.cover] },
+  }
+}
+
+export function projectStructuredData(project: Project) {
+  if (!site.url) return null
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: project.title,
+    description: project.summary,
+    image: new URL(project.cover, site.url).href,
+    datePublished: project.date,
+    dateModified: project.updated ?? project.date,
+    author: { "@type": "Organization", name: site.name },
+    publisher: { "@type": "Organization", name: site.name },
+    mainEntityOfPage: `${site.url}/proyectos/${project.slug}`,
   }
 }

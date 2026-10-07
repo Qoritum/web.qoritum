@@ -1,8 +1,9 @@
-﻿import { Mail, MessageCircle } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { ContactLinks } from "@/components/contact/contact-links"
 import { ContactForm } from "@/components/contact/contact-form"
 import { H2 } from "@/components/typography/heading"
 import { P } from "@/components/typography/description"
-import { site } from "@/lib/site"
 
 export function Contact() {
   return (
@@ -23,48 +24,12 @@ export function Contact() {
           De esa conversación sale la primera oportunidad concreta. Tu próxima
           mejora puede empezar esta semana.
         </P>
-        <ul className="mt-10 flex flex-col gap-7 lg:mt-14">
-          <li>
-            <a
-              href={site.whatsapp}
-              data-track="contact_click"
-              data-channel="whatsapp"
-              target="_blank"
-              rel="noreferrer"
-              className="group flex w-fit items-center gap-5 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-primary"
-            >
-              <MessageCircle
-                strokeWidth={1.5}
-                className="size-7 shrink-0 transition-colors group-hover:text-primary"
-              />
-              <div className="flex flex-col gap-2">
-                <P className="font-mono">Escríbenos</P>
-                <P className="transition-colors group-hover:text-primary">
-                  {site.phoneDisplay}
-                </P>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a
-              href={`mailto:${site.email}`}
-              data-track="contact_click"
-              data-channel="email"
-              className="group flex w-fit items-center gap-5 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-primary"
-            >
-              <Mail
-                strokeWidth={1.5}
-                className="size-7 shrink-0 transition-colors group-hover:text-primary"
-              />
-              <div className="flex flex-col gap-2">
-                <P className="font-mono">Correo corporativo</P>
-                <P className="transition-colors group-hover:text-primary">
-                  {site.email}
-                </P>
-              </div>
-            </a>
-          </li>
-        </ul>
+        <div className="mt-10 lg:mt-14">
+          <ContactLinks />
+        </div>
+        <Button asChild variant="outline" className="mt-10">
+          <Link href="/contactanos">Ayúdame a definir mi proyecto</Link>
+        </Button>
       </div>
       <ContactForm />
     </section>

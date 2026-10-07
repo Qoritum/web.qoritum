@@ -1,4 +1,4 @@
-﻿// Shared by the footer, contact section, metadata and structured data.
+// Shared by the footer, contact section, metadata and structured data.
 const configuredUrl = process.env.SITE_URL?.trim()
 function resolvePublicUrl(value?: string) {
   if (!value) return undefined
@@ -36,11 +36,10 @@ export const isIndexable =
   Boolean(site.url) && process.env.SITE_INDEXABLE === "true"
 
 export const navigation = [
-  { label: "Nosotros", href: "/#nosotros" },
-  { label: "Servicios", href: "/#servicios" },
-  { label: "Resultados", href: "/#results" },
-  { label: "Preguntas frecuentes", href: "/#preguntas-frecuentes" },
-  { label: "Contacto", href: "/#contacto" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Proyectos", href: "/proyectos" },
+  { label: "Contáctanos", href: "/contactanos" },
 ]
 
 export const socialLinks = [

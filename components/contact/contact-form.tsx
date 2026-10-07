@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight, Check } from "lucide-react"
+import { ArrowUpRight, Check, MessageCircle, Mail } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -28,16 +28,28 @@ import {
 import { ContactFieldControl } from "./contact-field"
 import { IMPROVEMENTS, SECTORS } from "./contact-schema"
 import { useContactForm } from "./use-contact-form"
+import type { InquiryAnswers } from "./inquiry-schema"
+import { inquiryHandoff } from "./inquiry-handoff"
+import { trackEvent } from "@/lib/marketing"
 
-export function ContactForm() {
-  const form = useContactForm()
+export function ContactForm({
+  brief,
+  initialImprovement,
+  formId = "contact",
+}: {
+  brief?: InquiryAnswers
+  initialImprovement?: string
+  formId?: string
+}) {
+  const form = useContactForm({ initialImprovement, formId })
+  const handoff = form.values ? inquiryHandoff(form.values, brief) : undefined
   return (
     <form
       noValidate
       onSubmit={form.submit}
       onFocusCapture={form.start}
       aria-label="Formulario de contacto"
-      className="pt-2 lg:pt-16"
+      className={brief ? "pt-2" : "pt-2 lg:pt-16"}
     >
       <FieldGroup>
         <div className="grid items-start gap-6 sm:grid-cols-2">
@@ -168,7 +180,10 @@ export function ContactForm() {
               onCheckedChange={form.changeConsent}
               required
             />
-            <FieldLabel htmlFor="consent" className="text-sm! sm:text-base! md:text-lg!">
+            <FieldLabel
+              htmlFor="consent"
+              className="text-sm! sm:text-base! md:text-lg!"
+            >
               Acepto las condiciones de contacto *
             </FieldLabel>
           </div>
@@ -191,16 +206,50 @@ export function ContactForm() {
         <div className="flex items-center justify-between gap-5">
           <FieldDescription>* Campos obligatorios</FieldDescription>
           <Button type="submit">
-            Enviar <ArrowUpRight data-icon="inline-end" />
+            Preparar consulta <ArrowUpRight data-icon="inline-end" />
           </Button>
         </div>
         <div role="status" aria-live="polite">
-          {form.validated && (
-            <FieldDescription className="flex items-start gap-2 border-l-2 border-primary bg-primary/5 p-4">
-              <Check className="shrink-0" />
-              Los datos están listos. El envío estará disponible próximamente;
-              por ahora, puedes escribirnos por WhatsApp o correo.
-            </FieldDescription>
+          {form.validated && handoff && (
+            <div className="space-y-5 border-l-2 border-primary bg-primary/5 p-5">
+              <FieldDescription className="flex items-start gap-2">
+                <Check className="shrink-0" />
+                Tu consulta está preparada. Elige WhatsApp o correo para
+                compartirla con nuestro equipo; todavía no se ha enviado.
+              </FieldDescription>
+              <div className="flex flex-wrap gap-3">
+                <Button asChild>
+                  <a
+                    href={handoff.whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() =>
+                      trackEvent("lead_handoff", {
+                        form_id: formId,
+                        channel: "whatsapp",
+                      })
+                    }
+                  >
+                    <MessageCircle />
+                    Abrir WhatsApp
+                  </a>
+                </Button>
+                <Button asChild variant="outline">
+                  <a
+                    href={handoff.email}
+                    onClick={() =>
+                      trackEvent("lead_handoff", {
+                        form_id: formId,
+                        channel: "email",
+                      })
+                    }
+                  >
+                    <Mail />
+                    Abrir correo
+                  </a>
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </FieldGroup>

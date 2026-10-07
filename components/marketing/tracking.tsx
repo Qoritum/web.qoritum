@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Script from "next/script"
 import { usePathname } from "next/navigation"
@@ -7,6 +7,8 @@ import { useConsent } from "./consent"
 import {
   marketing,
   TRACK_EVENT,
+  marketingEvents,
+  sanitizeEventParameters,
   type EventParameters,
   type MarketingEvent,
 } from "@/lib/marketing"
@@ -90,6 +92,9 @@ export function Tracking() {
       lastPage.current.google !== pathname
     ) {
       window.gtag?.("event", "page_view", analyticsPage())
+      const projectId = pathname.match(/^\/proyectos\/([a-z0-9-]+)$/)?.[1]
+      if (projectId)
+        window.gtag?.("event", "view_project", { project_id: projectId })
       lastPage.current.google = pathname
     }
     if (
@@ -112,26 +117,31 @@ export function Tracking() {
 
   useEffect(() => {
     function send(name: MarketingEvent, params: EventParameters) {
-      const safe = Object.fromEntries(
-        Object.entries(params).filter(
-          ([key, value]) =>
-            ["channel", "service_id", "form_id", "event_id"].includes(key) &&
-            typeof value === "string" &&
-            /^[a-zA-Z0-9_-]{1,100}$/.test(value)
-        )
-      )
+      const safe = sanitizeEventParameters(params)
       if (consent?.analytics && googleReady) window.gtag?.("event", name, safe)
       if (!consent?.advertising) return
-      if (name === "form_start" || name === "form_validated") return // Preview actions are not conversions.
+      if (
+        ![
+          "contact_click",
+          "select_service",
+          "select_project",
+          "lead_handoff",
+          "generate_lead",
+        ].includes(name)
+      )
+        return
+      const custom = name === "contact_click" || name === "lead_handoff"
       const adName =
         name === "generate_lead"
           ? "Lead"
-          : name === "select_service"
+          : name === "select_service" || name === "select_project"
             ? "ViewContent"
-            : "ContactLinkClick"
+            : name === "lead_handoff"
+              ? "LeadHandoff"
+              : "ContactLinkClick"
       if (metaReady)
         window.fbq?.(
-          name === "contact_click" ? "trackCustom" : "track",
+          custom ? "trackCustom" : "track",
           adName,
           safe,
           safe.event_id ? { eventID: safe.event_id } : undefined
@@ -150,15 +160,7 @@ export function Tracking() {
           parameters: EventParameters
         }>
       ).detail
-      if (
-        [
-          "contact_click",
-          "select_service",
-          "form_start",
-          "form_validated",
-          "generate_lead",
-        ].includes(detail?.name)
-      )
+      if (marketingEvents.includes(detail?.name))
         send(detail.name, detail.parameters ?? {})
     }
     function onClick(event: MouseEvent) {
@@ -170,6 +172,8 @@ export function Tracking() {
         send("contact_click", { channel: target.dataset.channel })
       if (target?.dataset.track === "select_service")
         send("select_service", { service_id: target.dataset.service })
+      if (target?.dataset.track === "select_project")
+        send("select_project", { project_id: target.dataset.project })
     }
     window.addEventListener(TRACK_EVENT, onTrack)
     document.addEventListener("click", onClick)

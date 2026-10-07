@@ -37,7 +37,13 @@ function words(children: ReactNode): ReactNode {
   })
 }
 
-export function WordReveal({ children }: { children: ReactNode }) {
+export function WordReveal({
+  children,
+  delay = 0,
+}: {
+  children: ReactNode
+  delay?: number
+}) {
   const ref = useRef<HTMLSpanElement>(null)
 
   useLayoutEffect(() => {
@@ -69,7 +75,7 @@ export function WordReveal({ children }: { children: ReactNode }) {
             [{ transform: "translateY(115%)" }, { transform: "translateY(0)" }],
             {
               duration: 820,
-              delay: index * stagger,
+              delay: delay + index * stagger,
               easing: "cubic-bezier(.22,1,.36,1)",
               fill: "backwards",
             }
@@ -97,7 +103,7 @@ export function WordReveal({ children }: { children: ReactNode }) {
       preference.removeEventListener("change", onPreference)
       show()
     }
-  }, [children])
+  }, [children, delay])
 
   return (
     <span ref={ref} className="word-reveal">

@@ -4,6 +4,51 @@
 
 @custom-variant dark (&:is(.dark *));
 
+[data-site-header] {
+  color: var(--foreground);
+  transition: transform 480ms cubic-bezier(.22,1,.36,1), background-color 240ms ease, box-shadow 240ms ease;
+}
+[data-site-header][data-hidden="true"] { transform: translateY(-110%); pointer-events: none; }
+[data-site-header][data-scrolled="true"] { background: var(--background); box-shadow: 0 8px 32px #1817250a; }
+[data-site-header] .brand-on-dark { display: none; }
+body:has(main [data-header-tone="light"]) [data-site-header]:not([data-scrolled="true"]) { color: #fff; }
+body:has(main [data-header-tone="light"]) [data-site-header]:not([data-scrolled="true"]) .brand-on-dark { display: block; }
+body:has(main [data-header-tone="light"]) [data-site-header]:not([data-scrolled="true"]) .brand-on-light { display: none; }
+
+.site-navigation-overlay {
+  z-index: 90;
+  background: transparent;
+  backdrop-filter: none;
+  animation: none;
+}
+.site-navigation {
+  inset: 0;
+  z-index: 100;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  padding: 0;
+  transform: none;
+  translate: none;
+  background: var(--background-2);
+  box-shadow: none;
+  border: 0;
+  overflow: hidden;
+}
+.site-navigation[data-state="open"] { animation: navigation-open 720ms cubic-bezier(.76,0,.24,1) both; }
+.site-navigation[data-state="closed"] { animation: navigation-close 460ms cubic-bezier(.76,0,.24,1) both; pointer-events: none; }
+.site-navigation[data-state="open"] .navigation-meta { animation: navigation-meta 720ms cubic-bezier(.22,1,.36,1) 320ms both; }
+.site-navigation[data-state="closed"] .navigation-label { animation: navigation-word-out 280ms cubic-bezier(.76,0,.24,1) both; }
+@keyframes navigation-meta { from { transform: translateY(28px); } to { transform: translateY(0); } }
+@keyframes navigation-open { from { clip-path: inset(0 0 100% 0); transform: translateY(-24px); } to { clip-path: inset(0); transform: translateY(0); } }
+@keyframes navigation-close { from { clip-path: inset(0); transform: translateY(0); } to { clip-path: inset(0 0 100% 0); transform: translateY(-24px); } }
+@keyframes navigation-word-out { from { transform: translateY(0); } to { transform: translateY(-115%); } }
+@media (prefers-reduced-motion: reduce) {
+  [data-site-header] { transition: none; }
+  .site-navigation, .site-navigation .navigation-label, .site-navigation .navigation-meta { animation: none !important; }
+}
+
 .backdrop-grid {
   background-image: linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px);
   background-size: 40px 40px;

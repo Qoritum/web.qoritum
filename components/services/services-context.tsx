@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext } from "react"
-import type { ServiceItem } from "./services.data"
+import type { ServiceItem } from "@/lib/services"
 
 export interface ServicesContextValue {
   services: ServiceItem[]

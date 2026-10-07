@@ -1,4 +1,4 @@
-﻿// Public IDs are validated before they are interpolated into vendor snippets.
+// Public IDs are validated before they are interpolated into vendor snippets.
 function validId(value: string | undefined, pattern: RegExp) {
   return value && pattern.test(value) ? value : undefined
 }
@@ -17,17 +17,55 @@ export type Consent = {
   advertising: boolean
   expires: number
 }
-export type MarketingEvent =
-  | "contact_click"
-  | "select_service"
-  | "form_start"
-  | "form_validated"
-  | "generate_lead"
+export const marketingEvents = [
+  "contact_click",
+  "select_service",
+  "select_project",
+  "view_project",
+  "filter_projects",
+  "qualification_start",
+  "qualification_step",
+  "qualification_complete",
+  "form_start",
+  "form_validated",
+  "lead_handoff",
+  "generate_lead",
+] as const
+export type MarketingEvent = (typeof marketingEvents)[number]
 export type EventParameters = {
   channel?: string
   service_id?: string
   form_id?: string
   event_id?: string
+  project_id?: string
+  filter_id?: string
+  step_id?: string
+  option_id?: string
+  goal_id?: string
+  timeline_id?: string
+}
+
+// Intentionally excludes search text, contact data and free-form answers.
+export function sanitizeEventParameters(params: EventParameters) {
+  return Object.fromEntries(
+    Object.entries(params).filter(
+      ([key, value]) =>
+        [
+          "channel",
+          "service_id",
+          "form_id",
+          "event_id",
+          "project_id",
+          "filter_id",
+          "step_id",
+          "option_id",
+          "goal_id",
+          "timeline_id",
+        ].includes(key) &&
+        typeof value === "string" &&
+        /^[a-zA-Z0-9_-]{1,100}$/.test(value)
+    )
+  )
 }
 
 export function parseConsent(value: string | null): Consent | null {

@@ -83,7 +83,9 @@ TikTok define eventos como ViewContent y SubmitForm; este último se reserva par
 
 Los clics de contacto expresan intención; no prueban que se haya enviado un mensaje. El formulario actual nunca dispara `generate_lead`.
 
-Los parámetros propios se limitan a canal, ID de servicio, ID de formulario y un ID de evento. No se envían nombres, correos, teléfonos ni texto libre. GA recibe URLs sin query o fragmento y solo admite los parámetros UTM previstos con formato limitado. Los SDKs publicitarios pueden recopilar información técnica de la visita según su propia configuración; evita introducir datos personales en URLs o campañas.
+Los parámetros propios se limitan a IDs controlados de canal, servicio, formulario, proyecto, filtro, pregunta, opción, objetivo, plazo y evento. No se envían nombres, correos, teléfonos, respuestas libres ni búsquedas. GA recibe URLs sin query o fragmento y solo admite los parámetros UTM previstos con formato limitado. Los SDKs publicitarios pueden recopilar información técnica de la visita según su propia configuración; evita introducir datos personales en URLs o campañas.
+
+El diagnóstico de `/contactanos`, la apertura de mensajes preparados y los nuevos eventos de proyectos se detallan en [projects-and-pages.md](./projects-and-pages.md). `lead_handoff` mide abrir WhatsApp/correo y no se registra como `generate_lead`.
 
 Para el backend futuro:
 

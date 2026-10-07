@@ -1,3 +1,5 @@
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { P } from "@/components/typography/description"
 import { H2, H3 } from "@/components/typography/heading"
 import { SectionBackdrop } from "@/components/section-backdrop"
@@ -35,6 +37,10 @@ export function About() {
           soluciones a partir de cómo realmente trabajas.
         </P>
       </div>
+
+      <Button asChild variant="outline" className="mt-8">
+        <Link href="/nosotros">Conoce más sobre Qoritum</Link>
+      </Button>
 
       <div className="my-25" />
 
